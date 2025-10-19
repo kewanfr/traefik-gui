@@ -32,6 +32,7 @@ pub struct HttpsRoute {
     pub host: String,
     pub prefix: Option<String>,
     pub https_redirect: bool,
+    pub auth_middleware: bool,
     pub allow_http_acme: bool,
 }
 
@@ -144,6 +145,21 @@ impl HttpsRoute {
                             service: "noop@internal".into(),
                             priority: route.priority,
                             middlewares: vec!["https-redirect".into()],
+                            tls: None,
+                        },
+                    );
+                }
+
+                if route.auth_middleware {
+                    let auth_router_name = format!("{}-auth", router_name);
+
+                    traefik_config.routers.insert(
+                        auth_router_name,
+                        HttpRouter {
+                            rule: host_rule.clone(),
+                            service: "noop@internal".into(),
+                            priority: route.priority,
+                            middlewares: vec!["authelia@file".into()],
                             tls: None,
                         },
                     );

@@ -273,6 +273,7 @@ pub async fn to_https(
                     priority: route.priority,
                     target: route.target,
                     https_redirect: false,
+                    auth_middleware: false,
                     allow_http_acme: false,
                 };
 

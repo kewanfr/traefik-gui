@@ -38,6 +38,7 @@ diesel::table! {
         host -> Text,
         prefix -> Nullable<Text>,
         https_redirect -> Bool,
+        auth_middleware -> Bool,
         allow_http_acme -> Bool,
     }
 }
