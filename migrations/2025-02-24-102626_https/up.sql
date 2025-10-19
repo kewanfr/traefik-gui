@@ -11,6 +11,7 @@ CREATE TABLE `https_routes`(
 	`host` TEXT NOT NULL,
 	`prefix` TEXT,
 	`https_redirect` BOOL NOT NULL,
+	`auth_middleware` BOOL NOT NULL,
 	`allow_http_acme` BOOL NOT NULL
 );
 
